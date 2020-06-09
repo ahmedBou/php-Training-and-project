@@ -1,11 +1,10 @@
 # php-Training-and-project
 
-1. Key Concepts
-Explain the concept of Object Encapsulation
-Explain the concept of Inheritance in Object Oriented Programming
-Describe what a "method" is in Object Oriented Programming
-Describe what an attribute is in Object Oriented programming
-Interpret PHP documentation describing built in objects like DateTime
-Give examples of the use of "$this" in an object method
-Explain the concept of "static" in Object Oriented Programming
-Explain the concept of "constructor" in Object Oriented Programming
+# 1. Key Concepts
+Explain why we use PDO over other SQL libraries in PHP
+Give examples of "SQL Injection" and describe how PDO avoids SQL Injection
+Create an application that makes a connection to a MySQL database using PDO
+Describe how to create an ID/Password to give an application to database tables
+Create a simple PHP application that runs queries against a database
+Describe how errors are handled in the PDO library in PHP
+Demonstrate how to read log files in a PHP hosting environment
