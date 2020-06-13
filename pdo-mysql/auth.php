@@ -36,10 +36,19 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']))
 if(isset($_POST['user_id'])){
     $sql = "DELETE from users WHERE user_id= :id";
     echo("<pre>".$sql."<pre>");
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(array(
-        ':id' =>$_POST['user_id']
-    ));
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    try{
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array(
+            ':id' =>$_POST['user_id']
+        ));
+    }catch(Exception $ex){
+        echo("Internal error, please contact support");
+        error_log("error4.php, SQL error=".$ex->getmessage());
+        // echo("Exception message: ".$ex->getmessage());
+
+    }
+
 }
 
 
