@@ -11,6 +11,7 @@
             ':email' => $_POST['email'],
             ':password' =>$_POST['password']
         ));
+        
     }
     // end of insertion
 ?>
