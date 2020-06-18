@@ -34,3 +34,101 @@
 * ![Screenshot](session_destroy.png)
 * The cookie unlocks the session, the cookie reassociates the session, but the cookie is not the session. 
 
+## How to work with session
+* Keeping track of users as they move around a website is known as **session tracking**.
+  
+## Why session tracking is dificult with HTTP
+![Screenshot](statless.png)
+* why session tracking is more difficult for web applications that use **HTTP** than it is for other types of applications. To start, a browser on a client requests a page from from a web server. After the web server returns the page, it closes the connection. When the browser makes a subsequent request, the web server has no way to associate the current request with the previous request. Since HTTP doesn't maintan state, it is known as a **statless protocol**.
+
+* PHP 5.5 only use cookies to work with session ID. As a result, session tracking only works if the user has cookies enabled. however, if you need your application to work correctly even for users who have cookies disabled, PHP can encode the session ID in the URL. This is sometimes called **URL encoding**, and you can configure your system so PHP transparently encodes the session ID in the URL. Unfortunatly there are several problem with this approach.
+* By default PHP use cookie to store a session ID in each browser. Then the browser passes the cookie to the server with each request.
+* **session_set_cookie_params($liftime)** function to control how the session cookie works , so to customize the cookie for the session, and must be called before the session_start().
+
+## How to set and geta  scalar variables
+### Set a variable in a session
+```php
+$_SESSION['product_code']= 'MBT-1234';
+```
+### Get a variable in a session
+```php
+$product_code = $_SESSION['product_code'];
+```
+## How to set and get arrays
+### Set an array in a session
+```php
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = array()
+}
+```
+
+### Add an element to an array that's stored in a session
+```php
+$_SESSIOn['cart']['key1'] = 'value1';
+$_SESSIOn['cart']['key2'] = 'value2';
+```
+## Get and use an array that's stored in a session
+```php
+$cart = $_SESSION['cart'];
+foreach($cart as $item)
+{
+    echo '<li>' .$item. '<li>';
+}
+ ```
+##How to remove variables from a session
+### Remove a session variable
+```php
+unset($_session['cart']);
+```
+### Remove all session variables
+```php
+$_SESSION = array();
+```
+# Description
+* Once you start a session, you can use the autoglobal $_SESSION variable to set and get the user's data for  session. This variable is an associative array.
+* if necessary, you can use the isset function to test if an element already exists in the $_SESSION array.
+* You can use the **unset** function to remove an element from the $_SESSION array. However, don't use the unset function on the $_SESSION as it can cause inpredictibale results.
+* You can set the $_SESSION array to an empty array to remove its contents.
+
+# How to end a session
+* **session_destroy()** Ends a session. Returns True if successful and False otherwise.
+## End a session 
+```php
+$_SESSION =array(); // Clear session data from memory
+session_destroy();  // Clean up the session ID
+```
+## Delete the session cookie from the browser
+```php
+$name = session_name();                   // Get the name of session cookie
+$expire = strtotime('-1year');           // Create expire date in the past     
+$params = session_get_cookie_params();  // Get session params
+$path = $params['path'];
+$domain = $params['domain'];
+$secure = $params['secure'];
+$httponly = $params['httponly'];
+setcookie($name, '', $expire, $path, $domain, $secure, $httponly);
+```
+# Description 
+* A session ends when the user closes the browser, when a specified amount of time elapses without a request, or when the code calls the session_destroy function.
+* to remove all data associated with the session from the client and the server, you can clear the session data from memory, call the session_destroy function, and use the setcookie function to delete the session cookie.
+* The session_name function gets the name of the session cookie. By default, the session cookie has a name of "PHPSESSID".
+* The session_get_cookie_params function gets an associative array that contain all of the parameters for the session cookie.
+  
+  # How to manage a session
+  ## Function to manage sessions
+  * **session_name()** Get the name of the session cookie. The default is PHPSESSID.
+  * **session_id(['$id])** If the parameter isn't specified, this function gets the current session ID. if no session exists, this function gets an empty string. if the parameter is specified, this function sets the session ID to the specified value.
+  * **session_regenerate_id()** Creates a new session ID for the current session. Returns true if successful and FALSE otherwise. This function can be used to help prevent session **hijacking**
+  * **session_write_close()** Ends the current session and saves session data. This function is only needed in special cases like redirects.
+  ### Get the name of the session cookie
+```php
+  $name = session_name();   // by default, PHPSESSID
+```
+### Get the value of the session ID
+```php
+id = session_id();   // for example , l1jef1hg2gdz8h6uiop2b2t1
+```
+### Set the session ID
+```php  
+session_id('abc123');
+```
