@@ -5,8 +5,6 @@ function add_item($key, $quantity){
 
     // if item already exists in cart, update quantity
 
-
-
     // Add item
     $cost = $products[$key]['cost'];
     $total = $cost * $quantity;

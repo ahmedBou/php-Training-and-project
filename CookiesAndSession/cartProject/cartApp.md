@@ -42,4 +42,8 @@
 * if the item isn't already in the cart, the add_item function gets the cost of the item from the product array and calculate the total for the item. Then, it creates an array that contains the item's name, cost , quantity, and total. Next, it stores the item array in the cart array using the item's key as the index.
 
 # the Add Item view
-* the add_item_view.php
+
+* the add_item_view.php shows the code for the Add Items page. This page displays a form that lets the user add an item to the cart by selecting a product and a quantity for that item. In addition, this page displays a link that lets the user view the cart without adding an item.
+
+* The form uses The **POST** method to submit the data back to the index.php controller for processing. This form includes a hidden field with a name of **action** and a value of **add** to indicate that the controller should add the item to the cart. 
+* The first <select> tag has a name of **productKey**. this tag lets the user select a product from a dop-down list. Whithin this tag, the **PHP** code uses a foreach loop to generate the <option> tags for the drop-down list. At the begining of the loop, this code formats the cost of each item as a number with two digits, and it uses the item name and formatted cost to generate the text to display for the item.

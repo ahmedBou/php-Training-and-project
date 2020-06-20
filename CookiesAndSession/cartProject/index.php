@@ -21,20 +21,20 @@ $products['MMS-3389'] = array('name' => 'Clarinet', 'cost' => '299.50');
 require_once('cart.php');
 
 // Get the action perform
-// $action = filter_input(INPUT_POST, 'action');
-// if($action === NULL){
-//     $action = filter_input(INPUT_POST, 'action');
-//     if($action === NULL){
-//         $action = 'show_add_item';
-//     }
-// }
+$action = filter_input(INPUT_POST, 'action');
+if($action === NULL){
+    $action = filter_input(INPUT_POST, 'action');
+    if($action === NULL){
+        $action = 'show_add_item';
+    }
+}
 
-// // ADD or update cart as needed
-// switch($action){
-//     case 'add':
-//         $product_key = filter_input(INPUT_POST, 'productKey');
-//         $item_qty = filter_input(INPUT_POST, 'itemqty');
-//         // add_item($product_key,$item_qty);
-// }
+// ADD or update cart as needed
+switch($action){
+    case 'add':
+        $product_key = filter_input(INPUT_POST, 'productKey');
+        $item_qty = filter_input(INPUT_POST, 'itemqty');
+        // add_item($product_key,$item_qty);
+}
 
 ?>
