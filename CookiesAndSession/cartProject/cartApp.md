@@ -37,7 +37,7 @@
 * the **cart.php** file show the code that models the behaviours of the shopping cart. This code defines 3 fcts. thes fcts let you add an itel to the cart, update an item in the cart, and get the subtotal for the items in the cart.
 
 ## add_item()
-* The add_item function takes an item key and quantity as its parameters and uses them to add specified item to the cart. To start, this code gets access to the global products array. Then, it checks if the quantity is less than 1. If so, this code exits the function .
+* The add_item function takes an item key and quantity as its parameters and uses them to add specified item to the cart. To start, this code gets access to the global products array. Then, it checks if the quantity is less than 1. If so, this code exits the function.
 
 * if the item isn't already in the cart, the add_item function gets the cost of the item from the product array and calculate the total for the item. Then, it creates an array that contains the item's name, cost , quantity, and total. Next, it stores the item array in the cart array using the item's key as the index.
 
@@ -46,4 +46,17 @@
 * the add_item_view.php shows the code for the Add Items page. This page displays a form that lets the user add an item to the cart by selecting a product and a quantity for that item. In addition, this page displays a link that lets the user view the cart without adding an item.
 
 * The form uses The **POST** method to submit the data back to the index.php controller for processing. This form includes a hidden field with a name of **action** and a value of **add** to indicate that the controller should add the item to the cart. 
+
 * The first <select> tag has a name of **productKey**. this tag lets the user select a product from a dop-down list. Whithin this tag, the **PHP** code uses a foreach loop to generate the <option> tags for the drop-down list. At the begining of the loop, this code formats the cost of each item as a number with two digits, and it uses the item name and formatted cost to generate the text to display for the item.
+
+* Whithin the loop , this code sets the value of the <option> tag to the key for the product. As a result, the key for the selected product is submitted to the the controller. This code sets the text for the <option> tag to a string that includes the name and cost of the product, so this text is displayed in the drop-down list.
+* The second <select> tag has a name of "itemqty". this tag lets the user select the quantity from a frop-down list. This code uses a for loop to generate the <option> tags for the drop-down list. These tags display values from 1 to 10.
+* Here, the code uses the index of the loop as both the value that's submitted to the control and the text that's displayed in the drop-down list.
+* At the end of the page, the View cart link lets the user go to the Cart View page without adding an item. Here, the href attribute of the <a> tag links to the controller and submits an action parameter of show_cart. As a result, this parameter is passed to the controller as part a Get request. that's why the controller checks both POST and GET requests for the action to perform.
+
+# The cart view
+* The cart_view.php file shows the code for the Cart page. the first line of PHP code checks the cart array in session. if the cart doesn't exist or the number of items in the cart is 0, this code displays a message stating that there aren't any items in the cart. otherwise, this code displays the contents of the cart in a table.
+* The cart table is contained whithin a form that lets the user update the quantity of each item in the cart. This form uses the POST method and submits the data to the index.php controller for processing. In addition, it contains hidden field with a name of **action** and a value of **update**. This tell the controller to update the quantities in the cart.
+* The cart table begins with a row that displays the headers for each of the columns in the table. Whithin this table, the <th> and <td> tags include class attributes. Theses attributes allow the CSS file for this application to control the alignment of the text in these columns.
+
+* This form uses a foreach loop to display each item in the cart. to start, the top of the the loop formats the item's cost a and total as a number with two digits
